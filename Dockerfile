@@ -1,18 +1,11 @@
-# Use an official Python runtime as the base image
-FROM python:3.12-slim
+# Use a small Linux base image
+FROM alpine:latest
 
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy requirements file and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application code
+# Copy all files from current directory to container
 COPY . .
 
-# Expose the port your app runs on (adjust if needed)
-EXPOSE 5000
-
-# Command to run your app
-CMD ["python", "app.py"]
+# Example: run a simple command when container starts
+CMD ["echo", "Hello, Docker!"]
