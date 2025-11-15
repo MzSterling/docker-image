@@ -1,13 +1,18 @@
-FROM python:3.9-slim
+# Use an official Python runtime as the base image
+FROM python:3.12-slim
 
+# Set working directory inside the container
 WORKDIR /app
 
-COPY . .
-
+# Copy requirements file and install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 5001
+# Copy the rest of the application code
+COPY . .
 
-ENV FLASK_APP=app.py
+# Expose the port your app runs on (adjust if needed)
+EXPOSE 5000
 
-CMD ["python", "-m", "flask", "run", "--host=0.0.0.0", "--port=5001"]
+# Command to run your app
+CMD ["python", "app.py"]
